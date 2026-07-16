@@ -8,7 +8,6 @@ An immersive dashboard that combines **real-time weather**, **ambient sounds** a
 
 🌐 **Live Demo:** https://cozychan.netlify.app
 
-[![Netlify Status](https://api.netlify.com/api/v1/badges/50e58e03-a8b0-44e5-a541-4e7f64a5e6c7/deploy-status)](https://app.netlify.com/projects/chiling/deploys)
 
 ![JavaScript](https://img.shields.io/badge/JavaScript-ES6+-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)
 ![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white)
