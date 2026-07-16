@@ -4,15 +4,17 @@
 
 ### Your weather. Your mood. Your focus.
 
-Transform your workspace with real-time weather, ambient sounds and productivity tools.
+An immersive dashboard that combines **real-time weather**, **ambient sounds** and **productivity tools** into one beautiful workspace.
 
 🌐 **Live Demo:** https://cozychan.netlify.app
 
+[![Netlify Status](https://api.netlify.com/api/v1/badges/50e58e03-a8b0-44e5-a541-4e7f64a5e6c7/deploy-status)](https://app.netlify.com/projects/chiling/deploys)
 
 ![JavaScript](https://img.shields.io/badge/JavaScript-ES6+-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)
 ![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white)
 ![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white)
-![Status](https://img.shields.io/badge/Status-In_Development-success?style=for-the-badge)
+![Open-Meteo](https://img.shields.io/badge/API-Open--Meteo-4DA3FF?style=for-the-badge)
+![Status](https://img.shields.io/badge/Status-Under_Development-orange?style=for-the-badge)
 
 </div>
 
@@ -20,86 +22,241 @@ Transform your workspace with real-time weather, ambient sounds and productivity
 
 # 📸 Preview
 
-> Main Dashboard
-
 <p align="center">
-  <img src="docs/images/dashboard.png" width="100%">
+    <img src="docs/images/dashboard.png" alt="CoZy Dashboard">
 </p>
 
 ---
 
-## ✨ About
+# ✨ About
 
-CoZy is a modern web dashboard that combines **weather**, **ambient sounds**, and **productivity tools** into a single relaxing workspace.
+**CoZy** is a modern dashboard designed to make studying and working more enjoyable.
 
-Designed for students, developers and anyone who wants to stay focused while enjoying an immersive atmosphere.
+Instead of only displaying the weather, CoZy transforms your workspace into a relaxing environment by combining:
 
----
+- 🌤️ Live weather information
+- 🎵 Ambient sounds
+- 🍅 Focus tools
+- 📅 Productivity widgets
+- 🎨 Dynamic themes
 
-# 🌟 Features
-
-## 🌤️ Weather
-
-- 🌍 Search any city
-- 📍 Detect your location
-- 🌡️ Current weather
-- 💧 Humidity
-- 🌬️ Wind
-- 🌅 Sunrise & Sunset
-- 📅 Forecast
+Everything changes depending on the current weather and time of day, creating a unique experience every time you open the app.
 
 ---
 
-## 🎵 Ambient Sounds
+# 🚀 Current Features
 
-- 🌧️ Rain
+### 🌤️ Weather
+
+- Search any city
+- Detect your current location
+- Current temperature
+- Feels like temperature
+- Humidity
+- Wind speed
+- Air quality
+- Local time
+- Multi-day forecast
+
+---
+
+### 🎨 Dynamic Themes
+
+- Sunny
+- Rain
+- Snow
+- Clouds
+- Thunderstorms
+- Night mode
+- Dynamic colors
+- Animated backgrounds
+
+---
+
+### 🎵 Ambient Sounds
+
+Choose the atmosphere you want.
+
+Available sounds:
+
+- 🌧 Rain
 - 🌊 Ocean
 - 🌲 Forest
 - 🔥 Fireplace
-- ☕ Coffee Shop
+- 🌬 Wind
 - 🐦 Birds
+- 🎵 Relaxing melody
+- 🏞 River
+
+Features:
+
+- Play / Pause
+- Volume control
+- Switch sounds instantly
 
 ---
 
-## 🍅 Productivity
+### 🍅 Focus Tools
 
-- Pomodoro
-- Timer
-- Calendar
-- Todo List
-- Statistics
+- Pomodoro Timer
+- Countdown Timer
+- Stopwatch
 
 ---
 
-# 🛠️ Built With
+### 📅 Productivity
+
+- Interactive Calendar
+- To-do List
+- Daily Planning
+
+---
+
+### 📱 Responsive Design
+
+Works on:
+
+- Desktop
+- Laptop
+- Tablet
+- Mobile
+
+---
+
+# 🛠 Tech Stack
 
 - HTML5
 - CSS3
-- JavaScript
+- JavaScript (ES6+)
+- Fetch API
 - Open-Meteo API
 - LocalStorage
+- Git LFS
 
 ---
 
-# 📁 Repository
+# 📁 Project Structure
 
-Current files:
+```text
+CoZy
+│
+├── assets/
+│   ├── sounds/
+│   ├── backgrounds/
+│   ├── icons/
+│   └── images/
+│
+├── css/
+├── js/
+├── docs/
+│   └── images/
+│
+├── index.html
+└── README.md
+```
+
+---
+
+# 🚧 Roadmap
+
+The project is still under active development.
+
+### Weather
+
+- [x] Current weather
+- [x] Forecast
+- [x] Geolocation
+- [ ] UV Index
+- [ ] Hourly forecast
+- [ ] Weather alerts
+
+### Ambient Experience
+
+- [x] Ambient sounds
+- [x] Volume controls
+- [ ] Automatic sound recommendations
+- [ ] Animated rain
+- [ ] Snow particles
+- [ ] Dynamic wallpapers
+- [ ] Day/Night transitions
+
+### Productivity
+
+- [x] Pomodoro Timer
+- [x] Countdown Timer
+- [x] Calendar
+- [x] Todo List
+- [ ] Statistics
+- [ ] Focus history
+- [ ] Daily goals
+- [ ] Weekly reports
+
+### Customization
+
+- [ ] Dark mode
+- [ ] Light mode
+- [ ] Custom themes
+- [ ] Favorite city
+- [ ] User preferences
+
+### Future Ideas
+
+- [ ] Spotify integration
+- [ ] AI study assistant
+- [ ] Motivational quotes
+- [ ] Habit tracker
+- [ ] Cloud synchronization
+- [ ] PWA support
+- [ ] Offline mode
+- [ ] User accounts
+
+---
+
+# 📂 Repository Notes
+
+Current repository contains:
 
 - `index.html`
 - `assets/sounds/`
 
-Audio files are managed using **Git LFS**.
+Audio files (`.mp3`) are stored using **Git LFS** due to their size.
 
 ---
 
-# 🚀 Live Demo
+# 💡 Why CoZy?
 
-https://cozychan.netlify.app
+CoZy was built as a personal learning project to improve skills in:
+
+- API consumption
+- Asynchronous JavaScript
+- DOM manipulation
+- Responsive design
+- UI/UX
+- LocalStorage
+- Front-end architecture
+
+---
+
+# 🤝 Contributions
+
+Suggestions, ideas and pull requests are always welcome.
+
+If you have an idea to improve CoZy, feel free to open an issue.
+
+---
+
+# ⭐ Support
+
+If you like this project, please leave a ⭐ on GitHub.
+
+It really helps and motivates future development.
 
 ---
 
 <div align="center">
 
-Made with ❤️ by Kai Jové
+### ☀️ Stay productive. Stay CoZy.
+
+Made with ❤️ by **Kai Jové**
 
 </div>
