@@ -2,9 +2,11 @@
 
 # 🌤️ CoZy
 
-### Weather • Focus • Ambience • Productivity
+### Your weather. Your mood. Your focus.
 
-Turn your workspace into the perfect environment.
+Transform your workspace with real-time weather, ambient sounds and productivity tools.
+
+🌐 **Live Demo:** https://cozychan.netlify.app
 
 [![Netlify Status](https://api.netlify.com/api/v1/badges/50e58e03-a8b0-44e5-a541-4e7f64a5e6c7/deploy-status)](https://app.netlify.com/projects/chiling/deploys)
 
@@ -17,13 +19,21 @@ Turn your workspace into the perfect environment.
 
 ---
 
+# 📸 Preview
+
+> Main Dashboard
+
+<p align="center">
+  <img src="docs/images/dashboard.png" width="100%">
+</p>
+
+---
+
 ## ✨ About
 
-**CoZy** is an immersive web application that combines **real-time weather**, **ambient sounds**, and **productivity tools** into one modern dashboard.
+CoZy is a modern web dashboard that combines **weather**, **ambient sounds**, and **productivity tools** into a single relaxing workspace.
 
-The application adapts its appearance based on the current weather conditions and time of day, creating a relaxing workspace for studying, working, or simply unwinding.
-
-Whether it's raining, snowing, or sunny, CoZy transforms the entire experience with dynamic visuals, sounds, and focus tools.
+Designed for students, developers and anyone who wants to stay focused while enjoying an immersive atmosphere.
 
 ---
 
@@ -31,166 +41,66 @@ Whether it's raining, snowing, or sunny, CoZy transforms the entire experience w
 
 ## 🌤️ Weather
 
-- Search any city
-- Detect your current location
-- Current temperature
-- Feels like temperature
-- Humidity
-- Wind speed
-- Weather conditions
-- Local time
-- Sunrise & Sunset
-- Multi-day forecast
-
----
-
-## 🎨 Dynamic Environment
-
-Automatically changes based on:
-
-- ☀️ Sunny
-- 🌧️ Rain
-- ❄️ Snow
-- ⛈️ Storm
-- 🌫️ Fog
-- 🌙 Night
-
-Including:
-
-- Animated backgrounds
-- Dynamic color palette
-- Smooth transitions
-- Weather animations
+- 🌍 Search any city
+- 📍 Detect your location
+- 🌡️ Current weather
+- 💧 Humidity
+- 🌬️ Wind
+- 🌅 Sunrise & Sunset
+- 📅 Forecast
 
 ---
 
 ## 🎵 Ambient Sounds
 
-- Rain
-- Ocean
-- Forest
-- Fireplace
-- Wind
-- Coffee Shop
-- Birds
-- Night ambience
-
-Features:
-
-- Play / Pause
-- Volume control
-- Multiple sound layers
-- Automatic recommendations
+- 🌧️ Rain
+- 🌊 Ocean
+- 🌲 Forest
+- 🔥 Fireplace
+- ☕ Coffee Shop
+- 🐦 Birds
 
 ---
 
 ## 🍅 Productivity
 
-- Pomodoro Timer
-- Countdown Timer
-- Stopwatch
-- Focus Sessions
-- Break Sessions
+- Pomodoro
+- Timer
+- Calendar
+- Todo List
+- Statistics
 
 ---
 
-## 📊 Statistics
-
-- Focus time
-- Completed Pomodoros
-- Daily streak
-- Weekly progress
-- Productivity history
-
----
-
-## ⚙️ Customization
-
-- Dark / Light Mode
-- Favorite city
-- Default timer
-- Volume settings
-- Animation toggle
-
----
-
-# 📂 Project Structure
-
-```text
-CoZy/
-│
-├── assets/
-│   ├── backgrounds/
-│   ├── images/
-│   ├── icons/
-│   └── sounds/
-│
-├── css/
-├── js/
-│
-├── index.html
-└── README.md
-```
-
----
-
-# 📁 Current Repository
-
-This repository currently contains:
-
-- `skymood (3).html`
-- `assets/sounds/`
-
-The HTML page includes the ambient player, weather interface and volume controls.
-
----
-
-# ⚠️ Notes
-
-Audio files (`.mp3`) are managed using **Git LFS** due to their size.
-
-Make sure Git LFS is installed before cloning the repository if you want to work with the original audio assets.
-
----
-
-# 🛠️ Tech Stack
+# 🛠️ Built With
 
 - HTML5
 - CSS3
-- JavaScript (ES6+)
-- Fetch API
-- LocalStorage
+- JavaScript
 - Open-Meteo API
+- LocalStorage
 
 ---
 
-# 🚀 Roadmap
+# 📁 Repository
 
-- [ ] Weather forecast
-- [ ] More ambient themes
-- [ ] AI recommendations
-- [ ] Calendar integration
-- [ ] Spotify integration
-- [ ] PWA support
-- [ ] Offline mode
-- [ ] Mobile optimization
+Current files:
+
+- `index.html`
+- `assets/sounds/`
+
+Audio files are managed using **Git LFS**.
 
 ---
 
-# ⭐ Support
+# 🚀 Live Demo
 
-If you enjoy this project, consider leaving a ⭐ on GitHub.
-
-It really helps!
+https://cozychan.netlify.app
 
 ---
 
 <div align="center">
 
-## 🌤️ CoZy
-
-**Weather meets productivity.**
-
-Made with ❤️ using HTML, CSS and JavaScript.
+Made with ❤️ by Kai Jové
 
 </div>
