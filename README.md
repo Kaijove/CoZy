@@ -22,7 +22,7 @@ An immersive dashboard that combines **real-time weather**, **ambient sounds** a
 # 📸 Preview
 
 <p align="center">
-    <img src="docs/images/dashboard.png">
+    <img src="dashboard.png">
 </p>
 
 ---
