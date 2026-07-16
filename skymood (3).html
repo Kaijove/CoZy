@@ -1,0 +1,762 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SkyMood ⋆｡°✩</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<style>
+  :root{
+    --bg1:#FFD9E8; --bg2:#FFE8CC; --bg3:#CDEFFF;
+    --card:#ffffffcc; --ink:#5B4B57; --ink-soft:#8A7A87;
+    --accent:#FF9EC4; --accent2:#FFC078; --shadow: rgba(180,140,160,.35);
+    --orb:#FFE066; --transition-speed: 1.4s; --pill:#ffffff8a;
+  }
+  body.dark{ --card:#242030cc; --ink:#F2E9F4; --ink-soft:#B7AAC0; --shadow: rgba(0,0,0,.45); --pill:#ffffff1a; }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{
+    font-family:'Quicksand', sans-serif;
+    min-height:100vh;
+    background: linear-gradient(135deg, var(--bg1), var(--bg2) 50%, var(--bg3));
+    background-size:200% 200%;
+    transition: background var(--transition-speed) ease, color .3s ease;
+    overflow-x:hidden; position:relative; padding:18px; color:var(--ink);
+  }
+  body.dark{ background: linear-gradient(135deg,#1b1830,#241f38 50%,#141220); }
+  button{ font-family:'Quicksand'; cursor:pointer; border:none; }
+
+  #sky{ position:fixed; inset:0; z-index:0; overflow:hidden; pointer-events:none; }
+  .celestial{
+    position:absolute; top:4%; left:50%; transform:translateX(-50%);
+    width:70px; height:70px; border-radius:50%;
+    background: radial-gradient(circle at 35% 30%, #fff6c9, var(--orb) 70%);
+    box-shadow: 0 0 60px 20px color-mix(in srgb, var(--orb) 50%, transparent);
+    transition: all var(--transition-speed) ease;
+  }
+  .celestial.moon{ background: radial-gradient(circle at 35% 30%, #fefefe, #d8d8e8 70%); box-shadow: 0 0 40px 12px rgba(255,255,255,.5); }
+  .star{ position:absolute; width:3px; height:3px; background:#fff; border-radius:50%; opacity:0; }
+  .cloud-bg{ position:absolute; background:#fff; border-radius:50px; opacity:0; }
+  .drop{ position:absolute; width:2px; height:14px; background:linear-gradient(#fff8,#a9d6ff); top:-20px; opacity:0; border-radius:2px;}
+  .flake{ position:absolute; top:-10px; color:#fff; opacity:0; font-size:14px;}
+  #lightning{ position:fixed; inset:0; background:#fff; opacity:0; pointer-events:none; z-index:1; }
+
+  #app{ position:relative; z-index:2; max-width:1100px; margin:0 auto; }
+  .topbar{ display:flex; align-items:center; justify-content:space-between; margin-bottom:16px; }
+  .brand h1{ font-family:'Fredoka'; font-weight:600; font-size:1.6rem; }
+  .brand h1 span{ color:var(--accent); }
+  .credit{ font-size:.62rem; color:var(--ink-soft); opacity:.45; margin-top:1px; }
+  .icon-btn{
+    background:var(--pill); backdrop-filter:blur(6px); color:var(--ink);
+    width:38px; height:38px; border-radius:50%; font-size:1rem;
+    display:flex; align-items:center; justify-content:center; box-shadow:0 3px 10px var(--shadow);
+    transition:transform .15s ease;
+  }
+  .icon-btn:hover{ transform:scale(1.08); }
+  .icon-group{ display:flex; gap:8px; }
+
+  .widget{ background:var(--card); backdrop-filter:blur(10px); border-radius:24px; padding:18px 20px; box-shadow:0 10px 28px var(--shadow); margin-bottom:16px; }
+  .widget h3{ font-family:'Fredoka'; font-size:.95rem; font-weight:600; margin-bottom:12px; display:flex; align-items:center; gap:6px; }
+
+  .dashboard{ display:grid; grid-template-columns: 1.15fr .85fr; gap:18px; align-items:start; }
+  @media (max-width:880px){ .dashboard{ grid-template-columns:1fr; } }
+
+  /* ---------- weather widget ---------- */
+  .search-row{ display:flex; gap:8px; margin-bottom:10px; }
+  #city-input{
+    flex:1; padding:12px 16px; border-radius:20px; border:none;
+    background:var(--pill); font-size:.95rem; color:var(--ink); outline:none;
+  }
+  #city-input::placeholder{ color:var(--ink-soft); }
+  .btn-primary{ border-radius:20px; padding:12px 18px; font-size:.9rem; font-weight:600; background:var(--accent); color:#fff; box-shadow:0 4px 14px var(--shadow); }
+  .btn-secondary{ width:100%; margin-bottom:10px; border-radius:20px; padding:11px; font-size:.87rem; font-weight:600; background:var(--accent2); color:#fff; box-shadow:0 4px 14px var(--shadow); }
+  #status{ font-size:.8rem; color:var(--ink-soft); min-height:16px; margin-bottom:4px; }
+
+  .weather-top{ display:flex; align-items:center; gap:16px; margin-bottom:14px; }
+  .mascot{ font-size:3.6rem; animation: bob 3s ease-in-out infinite; }
+  @keyframes bob{ 0%,100%{transform:translateY(0);} 50%{transform:translateY(-7px);} }
+  #city-name{ font-family:'Fredoka'; font-size:1.2rem; font-weight:600; }
+  #local-time{ font-size:.76rem; color:var(--ink-soft); }
+  #temp{ font-family:'Fredoka'; font-size:2.4rem; font-weight:700; margin-left:auto; }
+  #desc{ color:var(--ink-soft); text-transform:capitalize; font-size:.85rem; }
+
+  .details-grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:8px; margin-bottom:10px; }
+  .detail{ background:var(--pill); border-radius:14px; padding:8px 6px; font-size:.7rem; text-align:center; }
+  .detail b{ display:block; font-family:'Fredoka'; font-size:.92rem; font-weight:600; }
+
+  #msg{ font-size:.85rem; background:var(--pill); border-radius:14px; padding:10px 14px; text-align:center; margin-bottom:12px; }
+
+  .forecast-strip{ display:flex; gap:6px; overflow-x:auto; margin-bottom:14px; padding-bottom:2px; }
+  .fday{ flex:1 0 58px; background:var(--pill); border-radius:14px; padding:8px 4px; text-align:center; font-size:.7rem; }
+  .fday .em{ font-size:1.1rem; }
+
+  .sound-title{ font-size:.78rem; color:var(--ink-soft); margin-bottom:6px; }
+  .sound-row{ display:flex; flex-wrap:wrap; gap:6px; margin-bottom:10px; }
+  .sound-btn{ background:var(--pill); color:var(--ink); font-size:.8rem; padding:7px 10px; border-radius:14px; }
+  .sound-btn.active{ background:var(--accent); color:#fff; }
+  .volume-row{ display:flex; align-items:center; gap:8px; font-size:.85rem; }
+  input[type="range"]{ flex:1; accent-color:var(--accent); }
+
+  /* ---------- focus widget ---------- */
+  .subtabs{ display:flex; gap:6px; margin-bottom:12px; background:var(--pill); padding:3px; border-radius:14px; }
+  .subtab{ flex:1; padding:6px; border-radius:11px; background:transparent; color:var(--ink-soft); font-weight:600; font-size:.76rem; }
+  .subtab.active{ background:var(--accent2); color:#fff; }
+  .subpanel{ display:none; }
+  .subpanel.active{ display:block; }
+
+  .ring-wrap{ position:relative; width:150px; height:150px; margin:0 auto 12px; }
+  .ring-wrap svg{ transform:rotate(-90deg); }
+  .ring-bg{ fill:none; stroke:var(--pill); stroke-width:10; }
+  .ring-fg{ fill:none; stroke:var(--accent); stroke-width:10; stroke-linecap:round; transition:stroke-dashoffset .3s linear; }
+  .ring-center{ position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; }
+  #timer-display, #pomo-display{ font-family:'Fredoka'; font-size:1.5rem; font-weight:700; }
+  #session-label, #timer-sub{ font-size:.7rem; color:var(--ink-soft); }
+
+  .time-inputs{ display:flex; justify-content:center; gap:8px; margin-bottom:10px; }
+  .time-inputs input{ width:56px; text-align:center; padding:7px; border-radius:10px; border:none; background:var(--pill); color:var(--ink); font-size:.9rem; }
+
+  .control-row{ display:flex; justify-content:center; gap:10px; margin-bottom:4px; }
+  .ctrl-icon{ width:42px; height:42px; border-radius:50%; background:var(--pill); color:var(--ink); font-size:1rem; display:flex; align-items:center; justify-content:center; }
+  .ctrl-icon.primary{ background:var(--accent); color:#fff; }
+
+  .preset-row{ display:flex; gap:6px; margin-bottom:10px; }
+  .preset-btn{ flex:1; padding:6px; border-radius:12px; background:var(--pill); color:var(--ink); font-size:.7rem; font-weight:600; }
+  .preset-btn.active{ background:var(--accent2); color:#fff; }
+
+  #motivation{ font-size:.76rem; text-align:center; color:var(--ink-soft); margin-top:8px; min-height:16px; }
+
+  .stats-grid{ display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-top:12px; }
+  .stat{ background:var(--pill); border-radius:14px; padding:9px; text-align:center; }
+  .stat b{ display:block; font-family:'Fredoka'; font-size:1.05rem; }
+  .stat span{ font-size:.65rem; color:var(--ink-soft); }
+
+  /* ---------- calendar widget ---------- */
+  .cal-head{ display:flex; align-items:center; justify-content:space-between; margin-bottom:10px; }
+  .cal-head b{ font-family:'Fredoka'; font-size:.85rem; text-transform:capitalize; }
+  .cal-nav{ width:26px; height:26px; border-radius:50%; background:var(--pill); font-size:.7rem; display:flex; align-items:center; justify-content:center; color:var(--ink); }
+  .cal-grid{ display:grid; grid-template-columns:repeat(7,1fr); gap:4px; text-align:center; }
+  .cal-grid .dow{ font-size:.62rem; color:var(--ink-soft); font-weight:600; }
+  .cal-day{ font-size:.75rem; padding:6px 0; border-radius:8px; color:var(--ink); }
+  .cal-day.today{ background:var(--accent); color:#fff; font-weight:700; }
+  .cal-day.empty{ opacity:0; }
+
+  /* ---------- todo widget ---------- */
+  .todo-row{ display:flex; gap:6px; margin-bottom:10px; }
+  #todo-input{ flex:1; padding:9px 12px; border-radius:14px; border:none; background:var(--pill); color:var(--ink); font-size:.85rem; outline:none; }
+  #todo-add{ width:36px; height:36px; border-radius:50%; background:var(--accent); color:#fff; font-size:.9rem; }
+  #todo-list{ list-style:none; display:flex; flex-direction:column; gap:6px; max-height:220px; overflow-y:auto; }
+  #todo-list li{ display:flex; align-items:center; gap:8px; background:var(--pill); border-radius:12px; padding:8px 10px; font-size:.83rem; }
+  #todo-list li.done span{ text-decoration:line-through; opacity:.5; }
+  #todo-list li span{ flex:1; }
+  #todo-list li .check{ width:18px; height:18px; border-radius:50%; border:2px solid var(--accent); flex-shrink:0; cursor:pointer; }
+  #todo-list li.done .check{ background:var(--accent); }
+  #todo-list li .del{ color:var(--ink-soft); font-size:.8rem; cursor:pointer; }
+  #todo-empty{ font-size:.78rem; color:var(--ink-soft); text-align:center; padding:8px 0; }
+
+  /* ---------- settings modal ---------- */
+  #overlay{ position:fixed; inset:0; background:rgba(0,0,0,.35); backdrop-filter:blur(2px); display:none; align-items:center; justify-content:center; z-index:10; padding:16px; }
+  #overlay.show{ display:flex; }
+  #settings-panel{ background:var(--card); backdrop-filter:blur(14px); border-radius:24px; padding:22px; width:100%; max-width:380px; max-height:88vh; overflow-y:auto; box-shadow:0 14px 40px var(--shadow); }
+  #settings-panel h2{ font-family:'Fredoka'; margin-bottom:14px; display:flex; justify-content:space-between; align-items:center; font-size:1.1rem; }
+  .setting-row{ display:flex; align-items:center; justify-content:space-between; margin-bottom:14px; font-size:.86rem; }
+  .switch{ position:relative; width:44px; height:24px; background:var(--pill); border-radius:20px; }
+  .switch input{ opacity:0; width:0; height:0; }
+  .switch .knob{ position:absolute; top:3px; left:3px; width:18px; height:18px; background:#fff; border-radius:50%; box-shadow:0 2px 6px var(--shadow); transition:transform .2s ease; }
+  .switch input:checked + .knob{ transform:translateX(20px); background:var(--accent); }
+  .setting-row input[type="text"], .setting-row input[type="number"]{ width:110px; padding:7px 10px; border-radius:10px; border:none; background:var(--pill); color:var(--ink); font-size:.85rem; }
+
+  @media (max-width:480px){ .brand h1{font-size:1.3rem;} #temp{font-size:1.9rem;} }
+</style>
+</head>
+<body>
+
+<div id="lightning"></div>
+<div id="sky"><div class="celestial" id="celestial"></div></div>
+
+<div id="app">
+  <div class="topbar">
+    <div class="brand">
+      <h1>Sky<span>Mood</span> ⋆｡°✩</h1>
+      <div class="credit">fet per Kai Jové</div>
+    </div>
+    <div class="icon-group">
+      <button class="icon-btn" id="fullscreen-btn" title="Pantalla completa"><i class="fa-solid fa-expand"></i></button>
+      <button class="icon-btn" id="settings-btn" title="Ajustes"><i class="fa-solid fa-gear"></i></button>
+    </div>
+  </div>
+
+  <div class="dashboard">
+    <!-- ===== COLUMNA PRINCIPAL: CLIMA ===== -->
+    <div class="col-main">
+      <div class="widget">
+        <div class="search-row">
+          <input id="city-input" type="text" placeholder="Escribe una ciudad... 🌍" />
+          <button class="btn-primary" id="search-btn">Buscar</button>
+        </div>
+        <button class="btn-secondary" id="geo-btn">📍 Detectar mi ubicación</button>
+        <p id="status"></p>
+
+        <div id="card">
+          <div class="weather-top">
+            <div class="mascot" id="mascot">🌤️</div>
+            <div>
+              <div id="city-name">—</div>
+              <div id="local-time">--:--</div>
+              <div id="desc">—</div>
+            </div>
+            <div id="temp">--°</div>
+          </div>
+
+          <div class="details-grid">
+            <div class="detail">🌡️ Sensación<b id="feels">--°</b></div>
+            <div class="detail">💧 Humedad<b id="humidity">--%</b></div>
+            <div class="detail">💨 Viento<b id="wind">--</b></div>
+            <div class="detail">🍃 Aire<b id="aqi">--</b></div>
+          </div>
+
+          <div id="msg"></div>
+          <div class="forecast-strip" id="forecast"></div>
+
+          <div class="sound-title">🎵 Sonido ambiente</div>
+          <div class="sound-row" id="sound-tracks"></div>
+          <div class="volume-row">
+            <button class="icon-btn" id="audio-toggle" title="Reproducir/Pausar"><i class="fa-solid fa-play"></i></button>
+            <i class="fa-solid fa-volume-low"></i>
+            <input type="range" id="volume" min="0" max="1" step="0.05" value="0.6">
+            <i class="fa-solid fa-volume-high"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== COLUMNA LATERAL: POMODORO + CALENDARIO + TAREAS ===== -->
+    <div class="col-side">
+      <div class="widget">
+        <div class="subtabs">
+          <button class="subtab active" data-sub="timer">⏱️ Temporizador</button>
+          <button class="subtab" data-sub="pomodoro">🍅 Pomodoro</button>
+        </div>
+
+        <div class="subpanel active" id="sub-timer">
+          <div class="ring-wrap">
+            <svg width="150" height="150">
+              <circle class="ring-bg" cx="75" cy="75" r="65"></circle>
+              <circle class="ring-fg" id="ring-fg-timer" cx="75" cy="75" r="65" stroke-dasharray="408" stroke-dashoffset="0"></circle>
+            </svg>
+            <div class="ring-center"><div id="timer-display">05:00</div><div id="timer-sub">listo</div></div>
+          </div>
+          <div class="time-inputs">
+            <input type="number" id="min-input" min="0" max="180" value="5">
+            <input type="number" id="sec-input" min="0" max="59" value="0">
+          </div>
+          <div class="control-row">
+            <button class="ctrl-icon primary" id="timer-start" title="Iniciar"><i class="fa-solid fa-play"></i></button>
+            <button class="ctrl-icon" id="timer-pause" title="Pausar"><i class="fa-solid fa-pause"></i></button>
+            <button class="ctrl-icon" id="timer-reset" title="Reiniciar"><i class="fa-solid fa-rotate-left"></i></button>
+          </div>
+        </div>
+
+        <div class="subpanel" id="sub-pomodoro">
+          <div class="preset-row">
+            <button class="preset-btn active" data-work="25" data-rest="5">25/5</button>
+            <button class="preset-btn" data-work="50" data-rest="10">50/10</button>
+            <button class="preset-btn" id="preset-custom">Personal.</button>
+          </div>
+          <div class="ring-wrap">
+            <svg width="150" height="150">
+              <circle class="ring-bg" cx="75" cy="75" r="65"></circle>
+              <circle class="ring-fg" id="ring-fg-pomo" cx="75" cy="75" r="65" stroke-dasharray="408" stroke-dashoffset="0"></circle>
+            </svg>
+            <div class="ring-center"><div id="pomo-display">25:00</div><div id="session-label">Trabajo #1</div></div>
+          </div>
+          <div class="control-row">
+            <button class="ctrl-icon primary" id="pomo-start" title="Iniciar"><i class="fa-solid fa-play"></i></button>
+            <button class="ctrl-icon" id="pomo-pause" title="Pausar"><i class="fa-solid fa-pause"></i></button>
+            <button class="ctrl-icon" id="pomo-reset" title="Reiniciar"><i class="fa-solid fa-rotate-left"></i></button>
+          </div>
+          <div id="motivation">🌱 Cada sesión suma. ¡Tú puedes!</div>
+          <div class="stats-grid">
+            <div class="stat"><b id="stat-pomos">0</b><span>Hoy</span></div>
+            <div class="stat"><b id="stat-focus">0 min</b><span>Total</span></div>
+            <div class="stat"><b id="stat-streak">0</b><span>Racha</span></div>
+            <div class="stat"><b id="stat-today">0 min</b><span>Min. hoy</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="widget">
+        <h3>📅 Calendario</h3>
+        <div class="cal-head">
+          <button class="cal-nav" id="cal-prev"><i class="fa-solid fa-chevron-left"></i></button>
+          <b id="cal-label">—</b>
+          <button class="cal-nav" id="cal-next"><i class="fa-solid fa-chevron-right"></i></button>
+        </div>
+        <div class="cal-grid" id="cal-grid"></div>
+      </div>
+
+      <div class="widget">
+        <h3>✅ Cosas por hacer</h3>
+        <div class="todo-row">
+          <input id="todo-input" type="text" placeholder="Añadir tarea...">
+          <button id="todo-add"><i class="fa-solid fa-plus"></i></button>
+        </div>
+        <ul id="todo-list"></ul>
+        <div id="todo-empty">No tienes tareas pendientes 🌤️</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== SETTINGS MODAL ===== -->
+<div id="overlay">
+  <div id="settings-panel">
+    <h2>Ajustes <button class="icon-btn" id="close-settings"><i class="fa-solid fa-xmark"></i></button></h2>
+    <div class="setting-row"><span>🌙 Tema oscuro</span>
+      <label class="switch"><input type="checkbox" id="opt-dark"><span class="knob"></span></label>
+    </div>
+    <div class="setting-row"><span>🎵 Música ambiente</span>
+      <label class="switch"><input type="checkbox" id="opt-music" checked><span class="knob"></span></label>
+    </div>
+    <div class="setting-row"><span>✨ Animaciones</span>
+      <label class="switch"><input type="checkbox" id="opt-anim" checked><span class="knob"></span></label>
+    </div>
+    <div class="setting-row"><span>🔊 Volumen</span>
+      <input type="range" id="opt-volume" min="0" max="1" step="0.05" value="0.6">
+    </div>
+    <div class="setting-row"><span>🏙️ Ciudad favorita</span>
+      <input type="text" id="opt-city" placeholder="Barcelona">
+    </div>
+    <div class="setting-row"><span>🍅 Pomodoro (min)</span>
+      <input type="number" id="opt-pomo-work" value="25" min="1" max="180">
+    </div>
+    <div class="setting-row"><span>☕ Descanso (min)</span>
+      <input type="number" id="opt-pomo-rest" value="5" min="1" max="60">
+    </div>
+    <button class="btn-primary" style="width:100%" id="save-settings">Guardar ajustes</button>
+  </div>
+</div>
+
+<audio id="ambient-audio" loop></audio>
+
+<script>
+/* ==================================================================
+   Estado global
+   ================================================================== */
+const $ = id => document.getElementById(id);
+const LS_SETTINGS = 'skymood_settings';
+const LS_STATS = 'skymood_stats';
+const LS_TODOS = 'skymood_todos';
+
+let settings = Object.assign({ dark:false, music:true, animations:true, volume:0.6, favCity:'', pomoWork:25, pomoRest:5 },
+  JSON.parse(localStorage.getItem(LS_SETTINGS) || '{}'));
+let stats = Object.assign({ completedPomodoros:0, totalFocusMinutes:0, streak:0, lastDate:null, history:{} },
+  JSON.parse(localStorage.getItem(LS_STATS) || '{}'));
+let todos = JSON.parse(localStorage.getItem(LS_TODOS) || '[]');
+
+function saveSettings(){ localStorage.setItem(LS_SETTINGS, JSON.stringify(settings)); }
+function saveStats(){ localStorage.setItem(LS_STATS, JSON.stringify(stats)); }
+function saveTodos(){ localStorage.setItem(LS_TODOS, JSON.stringify(todos)); }
+function todayKey(){ return new Date().toISOString().slice(0,10); }
+function applyTheme(){ document.body.classList.toggle('dark', settings.dark); $('opt-dark').checked = settings.dark; }
+
+/* ==================================================================
+   Sub-tabs (temporizador / pomodoro)
+   ================================================================== */
+document.querySelectorAll('.subtab').forEach(t=>{
+  t.addEventListener('click', ()=>{
+    document.querySelectorAll('.subtab').forEach(x=>x.classList.remove('active'));
+    document.querySelectorAll('.subpanel').forEach(x=>x.classList.remove('active'));
+    t.classList.add('active'); $('sub-'+t.dataset.sub).classList.add('active');
+  });
+});
+
+/* ==================================================================
+   Ajustes / modal
+   ================================================================== */
+$('settings-btn').addEventListener('click', ()=>{
+  $('opt-dark').checked = settings.dark; $('opt-music').checked = settings.music; $('opt-anim').checked = settings.animations;
+  $('opt-volume').value = settings.volume; $('opt-city').value = settings.favCity;
+  $('opt-pomo-work').value = settings.pomoWork; $('opt-pomo-rest').value = settings.pomoRest;
+  $('overlay').classList.add('show');
+});
+$('close-settings').addEventListener('click', ()=> $('overlay').classList.remove('show'));
+$('overlay').addEventListener('click', e=>{ if(e.target.id==='overlay') $('overlay').classList.remove('show'); });
+$('save-settings').addEventListener('click', ()=>{
+  settings.dark = $('opt-dark').checked; settings.music = $('opt-music').checked; settings.animations = $('opt-anim').checked;
+  settings.volume = parseFloat($('opt-volume').value); settings.favCity = $('opt-city').value.trim();
+  settings.pomoWork = parseInt($('opt-pomo-work').value) || 25; settings.pomoRest = parseInt($('opt-pomo-rest').value) || 5;
+  saveSettings(); applyTheme();
+  $('volume').value = settings.volume; audio.volume = settings.volume;
+  if(!settings.music) audio.pause();
+  resetPomodoroToPreset(settings.pomoWork, settings.pomoRest, true);
+  $('overlay').classList.remove('show');
+});
+$('fullscreen-btn').addEventListener('click', ()=>{
+  if(!document.fullscreenElement) document.documentElement.requestFullscreen().catch(()=>{});
+  else document.exitFullscreen();
+});
+
+/* ==================================================================
+   Clima
+   ================================================================== */
+function profileFor(code, isDay){
+  if(code === 0) return { key:'clear', label:'Cielo despejado', mascot: isDay ? '☀️' : '🌙', sound:'ocean',
+    day:{bg1:'#FFE9B0', bg2:'#FFD3A3', bg3:'#FFF3D6', orb:'#FFE066'}, night:{bg1:'#2b2350', bg2:'#3a2f66', bg3:'#191536', orb:'#e8e8f5'} };
+  if([1,2,3].includes(code)) return { key:'clouds', label:'Parcialmente nublado', mascot:'⛅', sound:'wind',
+    day:{bg1:'#CFE0EE', bg2:'#E4E9F0', bg3:'#B9D3E6', orb:'#FFE066'}, night:{bg1:'#2c3450', bg2:'#3b4566', bg3:'#1c2136', orb:'#e8e8f5'} };
+  if([45,48].includes(code)) return { key:'fog', label:'Niebla', mascot:'🌫️', sound:'forest',
+    day:{bg1:'#D8D8D8', bg2:'#E9E9E9', bg3:'#C7C7C7', orb:'#FFE066'}, night:{bg1:'#33363d', bg2:'#41444c', bg3:'#25272d', orb:'#cfcfcf'} };
+  if([51,53,55,56,57,61,63,65,66,67,80,81,82].includes(code)) return { key:'rain', label:'Lluvia', mascot:'🌧️', sound:'rain',
+    day:{bg1:'#9FB8CE', bg2:'#B7C9D8', bg3:'#7E9BB4', orb:'#e4e4e4'}, night:{bg1:'#232c3d', bg2:'#2c3648', bg3:'#161c29', orb:'#cfd6e0'} };
+  if([71,73,75,77,85,86].includes(code)) return { key:'snow', label:'Nieve', mascot:'❄️', sound:'wind',
+    day:{bg1:'#E4F1FB', bg2:'#CDE7F7', bg3:'#F3FAFF', orb:'#fff'}, night:{bg1:'#28324a', bg2:'#354160', bg3:'#1a2135', orb:'#eef3ff'} };
+  if([95,96,99].includes(code)) return { key:'storm', label:'Tormenta', mascot:'⛈️', sound:'rain',
+    day:{bg1:'#5b5f78', bg2:'#43465e', bg3:'#71748a', orb:'#dcdce6'}, night:{bg1:'#15151f', bg2:'#20202e', bg3:'#0c0c14', orb:'#c9c9d6'} };
+  return { key:'clouds', label:'Variable', mascot:'🌥️', sound:'wind',
+    day:{bg1:'#CFE0EE', bg2:'#E4E9F0', bg3:'#B9D3E6', orb:'#FFE066'}, night:{bg1:'#2c3450', bg2:'#3b4566', bg3:'#1c2136', orb:'#e8e8f5'} };
+}
+function tempMessage(t){
+  if(t >= 35) return "🔥 Hace muchísimo calor. Mantente hidratado.";
+  if(t >= 20) return "😊 Temperatura perfecta para salir.";
+  if(t >= 10) return "🍃 Fresquito, lleva una chaqueta ligera.";
+  if(t > 0)   return "🧥 Hace frío, abrígate un poco.";
+  return "🧣 Hace muchísimo frío. Abrígate bien.";
+}
+function aqiLabel(v){ if(v==null) return '--'; if(v<=50) return 'Buena 🙂'; if(v<=100) return 'Aceptable'; if(v<=150) return 'Regular 😐'; return 'Mala 😷'; }
+const WEATHER_ICONS = {0:'☀️',1:'🌤️',2:'⛅',3:'☁️',45:'🌫️',48:'🌫️',51:'🌦️',53:'🌦️',55:'🌧️',61:'🌧️',63:'🌧️',65:'🌧️',71:'🌨️',73:'❄️',75:'❄️',80:'🌦️',81:'🌧️',82:'⛈️',95:'⛈️',96:'⛈️',99:'⛈️'};
+
+const AMBIENT_SOUNDS = {
+  forest:{ label:'🌲 Bosque', src:'assets/sounds/forest.mp3' },
+  fireplace:{ label:'🔥 Chimenea', src:'assets/sounds/fireplace.mp3' },
+  wind:{ label:'🍃 Viento', src:'assets/sounds/wind.mp3' },
+  ocean:{ label:'🌊 Mar', src:'assets/sounds/ocean.mp3' },
+  zelda:{ label:'🎵 Melodía', src:'assets/sounds/zelda_campfire.mp3' },
+  river:{ label:'🏞️ Río', src:'assets/sounds/river.mp3' },
+  birds:{ label:'🐦 Pájaros', src:'assets/sounds/birds.mp3' }
+};
+
+const ambientPlayers = {};
+function makePlayer(key){ if(ambientPlayers[key]) return ambientPlayers[key]; const p = new Audio(AMBIENT_SOUNDS[key].src); p.loop = true; p.preload = 'auto'; p.volume = settings.volume; ambientPlayers[key] = p; return p; }
+window.ambientPlayers = ambientPlayers;
+
+function buildSoundButtons(){
+  const wrap = $('sound-tracks'); wrap.innerHTML = '';
+  Object.entries(AMBIENT_SOUNDS).forEach(([key,val])=>{
+    const b = document.createElement('button'); b.className = 'sound-btn'; b.textContent = val.label; b.dataset.key = key;
+    b.addEventListener('click', ()=> togglePlayer(key, b)); wrap.appendChild(b);
+  });
+}
+
+function togglePlayer(key, btn){
+  if(!settings.music){ $('status').textContent = 'Activa la música en Ajustes para reproducir sonidos.'; return; }
+  const p = makePlayer(key);
+  if(p.paused){ p.play().then(()=>{ btn.classList.add('active'); updateAudioToggleIcon(); }).catch(()=>{ $('status').textContent = 'Toca la página para permitir reproducción automática.'; }); }
+  else { p.pause(); btn.classList.remove('active'); updateAudioToggleIcon(); }
+}
+
+function updateAudioToggleIcon(){ const b = $('audio-toggle'); if(!b) return; const anyPlaying = Object.values(ambientPlayers).some(p=>p && !p.paused); b.querySelector('i').className = anyPlaying ? 'fa-solid fa-pause' : 'fa-solid fa-play'; }
+
+function pauseAll(){ Object.values(ambientPlayers).forEach(p=>{ try{ p.pause(); }catch(e){} }); document.querySelectorAll('.sound-btn').forEach(b=>b.classList.remove('active')); updateAudioToggleIcon(); }
+function playActiveButtons(){ document.querySelectorAll('.sound-btn').forEach((btn,i)=>{ if(btn.classList.contains('active')){ const key = Object.keys(AMBIENT_SOUNDS)[i]; const p = makePlayer(key); p.play().catch(()=>{}); } }); updateAudioToggleIcon(); }
+
+const audioToggleBtn = $('audio-toggle'); if(audioToggleBtn){ audioToggleBtn.addEventListener('click', ()=>{ const anyPlaying = Object.values(ambientPlayers).some(p=>p && !p.paused); if(anyPlaying) pauseAll(); else { const anyActive = Array.from(document.querySelectorAll('.sound-btn')).some(b=>b.classList.contains('active')); if(anyActive) playActiveButtons(); else { const firstKey = Object.keys(AMBIENT_SOUNDS)[0]; const p = makePlayer(firstKey); p.play().then(()=>{ document.querySelectorAll('.sound-btn')[0]?.classList.add('active'); updateAudioToggleIcon(); }).catch(()=>{ $('status').textContent='Toca la página para permitir reproducción automática.'; }); } } }); }
+
+$('volume').addEventListener('input', e=>{ const v = parseFloat(e.target.value); settings.volume = v; saveSettings(); Object.values(ambientPlayers).forEach(p=>{ if(p) p.volume = v; }); });
+
+
+const sky = $('sky'), celestial = $('celestial');
+let particlesInterval = null, lightningInterval = null;
+function clearParticles(){ if(particlesInterval) clearInterval(particlesInterval); sky.querySelectorAll('.drop,.flake,.cloud-bg,.star').forEach(el=>el.remove()); }
+
+function applyVisuals(profile, isDay){
+  const p = isDay ? profile.day : profile.night;
+  const root = document.documentElement.style;
+  root.setProperty('--bg1', p.bg1); root.setProperty('--bg2', p.bg2); root.setProperty('--bg3', p.bg3); root.setProperty('--orb', p.orb);
+  celestial.classList.toggle('moon', !isDay);
+  clearParticles();
+  if(lightningInterval){ clearInterval(lightningInterval); lightningInterval=null; }
+  if(!settings.animations) return;
+
+  if(!isDay){
+    for(let i=0;i<36;i++){
+      const s = document.createElement('div'); s.className='star';
+      s.style.left = Math.random()*100+'%'; s.style.top = Math.random()*55+'%'; s.style.opacity = Math.random()*0.9+0.1;
+      sky.appendChild(s);
+    }
+  }
+  if(profile.key === 'clouds' || profile.key === 'storm'){
+    for(let i=0;i<4;i++){
+      const c = document.createElement('div'); c.className='cloud-bg';
+      const w = 100+Math.random()*80, h = w*0.4;
+      c.style.width=w+'px'; c.style.height=h+'px'; c.style.top = (10+Math.random()*20)+'%'; c.style.left = '-150px'; c.style.opacity = .55;
+      c.style.animation = `driftCloud ${25+Math.random()*20}s linear ${i*4}s infinite`; sky.appendChild(c);
+    }
+  }
+  if(profile.key === 'rain' || profile.key === 'storm'){
+    particlesInterval = setInterval(()=>{
+      const d = document.createElement('div'); d.className='drop';
+      d.style.left = Math.random()*100+'%'; d.style.opacity = .5+Math.random()*.4;
+      d.style.animation = `fallDrop ${.6+Math.random()*.4}s linear forwards`;
+      sky.appendChild(d); setTimeout(()=>d.remove(), 1200);
+    }, 60);
+  }
+  if(profile.key === 'snow'){
+    particlesInterval = setInterval(()=>{
+      const f = document.createElement('div'); f.className='flake'; f.textContent='❄';
+      f.style.left = Math.random()*100+'%'; f.style.opacity = .6+Math.random()*.4;
+      f.style.animation = `fallFlake ${3+Math.random()*3}s linear forwards`;
+      sky.appendChild(f); setTimeout(()=>f.remove(), 6500);
+    }, 200);
+  }
+  if(profile.key === 'storm'){
+    lightningInterval = setInterval(()=>{
+      $('lightning').style.transition = 'none'; $('lightning').style.opacity = .8;
+      setTimeout(()=>{ $('lightning').style.transition='opacity .4s ease'; $('lightning').style.opacity = 0; }, 90);
+    }, 3500 + Math.random()*3000);
+  }
+}
+const styleTag = document.createElement('style');
+styleTag.textContent = `
+@keyframes fallDrop{ from{transform:translateY(0);} to{transform:translateY(110vh);} }
+@keyframes fallFlake{ from{transform:translateY(0) translateX(0) rotate(0);} to{transform:translateY(110vh) translateX(30px) rotate(180deg);} }
+@keyframes driftCloud{ from{transform:translateX(0);} to{transform:translateX(120vw);} }
+`;
+document.head.appendChild(styleTag);
+
+async function geocodeCity(name){
+  const res = await fetch(`https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(name)}&count=1&language=es`);
+  const data = await res.json();
+  if(!data.results || !data.results.length) throw new Error('Ciudad no encontrada');
+  return data.results[0];
+}
+async function getWeather(lat, lon){
+  const res = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=temperature_2m,apparent_temperature,relative_humidity_2m,wind_speed_10m,weather_code,is_day&daily=weather_code,temperature_2m_max,temperature_2m_min&forecast_days=5&timezone=auto`);
+  return res.json();
+}
+async function getAirQuality(lat, lon){
+  try{ const res = await fetch(`https://air-quality-api.open-meteo.com/v1/air-quality?latitude=${lat}&longitude=${lon}&current=us_aqi`);
+    const data = await res.json(); return data?.current?.us_aqi ?? null; }catch(e){ return null; }
+}
+let clockTimer = null;
+function startLocalClock(isoTime){
+  if(clockTimer) clearInterval(clockTimer);
+  let t = new Date(isoTime);
+  const render = ()=>{ $('local-time').textContent = t.toLocaleTimeString('es-ES',{hour:'2-digit',minute:'2-digit'}); };
+  render(); clockTimer = setInterval(()=>{ t = new Date(t.getTime()+1000); render(); }, 1000);
+}
+async function renderWeather(place, weather, aqi){
+  const cur = weather.current; const isDay = cur.is_day === 1; const profile = profileFor(cur.weather_code, isDay);
+  $('city-name').textContent = `${place.name}${place.country ? ', '+place.country : ''}`;
+  $('temp').textContent = `${Math.round(cur.temperature_2m)}°C`;
+  $('desc').textContent = `${profile.label} ${profile.mascot}`;
+  $('mascot').textContent = profile.mascot;
+  $('msg').textContent = tempMessage(cur.temperature_2m);
+  $('feels').textContent = `${Math.round(cur.apparent_temperature)}°C`;
+  $('humidity').textContent = `${cur.relative_humidity_2m}%`;
+  $('wind').textContent = `${Math.round(cur.wind_speed_10m)} km/h`;
+  $('aqi').textContent = aqiLabel(aqi);
+  startLocalClock(cur.time);
+  const fc = $('forecast'); fc.innerHTML = '';
+  weather.daily.time.forEach((d,i)=>{
+    if(i===0) return;
+    const dt = new Date(d);
+    const el = document.createElement('div'); el.className='fday';
+    el.innerHTML = `<div>${dt.toLocaleDateString('es-ES',{weekday:'short'})}</div>
+      <div class="em">${WEATHER_ICONS[weather.daily.weather_code[i]] || '🌤️'}</div>
+      <div>${Math.round(weather.daily.temperature_2m_max[i])}°/${Math.round(weather.daily.temperature_2m_min[i])}°</div>`;
+    fc.appendChild(el);
+  });
+  applyVisuals(profile, isDay);
+  $('card').style.display = 'block';
+  playTrack(profile.sound);
+}
+async function searchCity(name){
+  try{
+    $('status').textContent = 'Buscando... ⏳';
+    const place = await geocodeCity(name);
+    const [weather, aqi] = await Promise.all([ getWeather(place.latitude, place.longitude), getAirQuality(place.latitude, place.longitude) ]);
+    await renderWeather(place, weather, aqi);
+    $('status').textContent = '';
+  }catch(e){ $('status').textContent = 'No se ha encontrado esa ciudad 😕'; $('card').style.display = 'none'; }
+}
+$('search-btn').addEventListener('click', ()=>{ const v=$('city-input').value.trim(); if(v) searchCity(v); });
+$('city-input').addEventListener('keydown', e=>{ if(e.key==='Enter') $('search-btn').click(); });
+$('geo-btn').addEventListener('click', ()=>{
+  if(!navigator.geolocation){ $('status').textContent='Tu navegador no soporta geolocalización'; return; }
+  $('status').textContent = 'Localizando... 📍';
+  navigator.geolocation.getCurrentPosition(async pos=>{
+    const { latitude, longitude } = pos.coords;
+    try{
+      const [weather, aqi] = await Promise.all([ getWeather(latitude, longitude), getAirQuality(latitude, longitude) ]);
+      await renderWeather({ name:'Tu ubicación', country:'' }, weather, aqi);
+      $('status').textContent = '';
+    }catch(e){ $('status').textContent = 'No se ha podido obtener el tiempo 😕'; }
+  }, ()=>{ $('status').textContent = 'No se ha podido acceder a tu ubicación'; });
+});
+
+/* ==================================================================
+   Temporizador
+   ================================================================== */
+const RING_LEN = 408;
+let timerTotal = 300, timerLeft = 300, timerRunning = false, timerInt = null;
+function beep(freq=880, dur=180){
+  try{
+    const ctx = new (window.AudioContext||window.webkitAudioContext)();
+    const osc = ctx.createOscillator(); const gain = ctx.createGain();
+    osc.frequency.value = freq; osc.connect(gain); gain.connect(ctx.destination);
+    gain.gain.setValueAtTime(.15, ctx.currentTime); osc.start(); osc.stop(ctx.currentTime + dur/1000);
+  }catch(e){}
+}
+function fmt(s){ const m=Math.floor(s/60); const r=s%60; return `${String(m).padStart(2,'0')}:${String(r).padStart(2,'0')}`; }
+function updateTimerRing(){
+  const pct = timerTotal ? timerLeft/timerTotal : 0;
+  $('ring-fg-timer').style.strokeDashoffset = RING_LEN * (1-pct);
+  $('timer-display').textContent = fmt(timerLeft);
+}
+function tickTimer(){
+  if(timerLeft<=0){ clearInterval(timerInt); timerRunning=false; $('timer-sub').textContent='¡Tiempo!'; beep(660,300); setTimeout(()=>beep(880,300),300); return; }
+  timerLeft--; updateTimerRing();
+}
+$('timer-start').addEventListener('click', ()=>{
+  if(timerRunning) return;
+  if(timerLeft<=0){ timerTotal = (parseInt($('min-input').value)||0)*60 + (parseInt($('sec-input').value)||0); timerLeft = timerTotal; }
+  timerRunning = true; $('timer-sub').textContent='en marcha...'; timerInt = setInterval(tickTimer, 1000);
+});
+$('timer-pause').addEventListener('click', ()=>{ clearInterval(timerInt); timerRunning=false; $('timer-sub').textContent='pausado'; });
+$('timer-reset').addEventListener('click', ()=>{
+  clearInterval(timerInt); timerRunning=false;
+  timerTotal = (parseInt($('min-input').value)||0)*60 + (parseInt($('sec-input').value)||0);
+  timerLeft = timerTotal; $('timer-sub').textContent='listo'; updateTimerRing();
+});
+$('min-input').addEventListener('change', ()=>{ if(!timerRunning) $('timer-reset').click(); });
+$('sec-input').addEventListener('change', ()=>{ if(!timerRunning) $('timer-reset').click(); });
+updateTimerRing();
+
+/* ==================================================================
+   Pomodoro
+   ================================================================== */
+const MOTIVATIONS = ["🌱 Cada sesión suma. ¡Tú puedes!", "🍅 Un pomodoro más cerca de tu meta.",
+  "✨ Concéntrate en una cosa a la vez.", "🌤️ Respira, y sigue adelante.",
+  "🎯 Pequeños pasos, grandes resultados.", "💪 Ya has llegado hasta aquí, sigue así."];
+let pomoWork = settings.pomoWork, pomoRest = settings.pomoRest, pomoIsWork = true, pomoCount = 0;
+let pomoTotal = pomoWork*60, pomoLeft = pomoTotal, pomoRunning=false, pomoInt=null;
+function updatePomoRing(){
+  const pct = pomoTotal ? pomoLeft/pomoTotal : 0;
+  $('ring-fg-pomo').style.strokeDashoffset = RING_LEN * (1-pct);
+  $('pomo-display').textContent = fmt(pomoLeft);
+  $('session-label').textContent = (pomoIsWork ? `Trabajo #${pomoCount+1}` : 'Descanso ☕');
+}
+function resetPomodoroToPreset(work, rest, keepCount){
+  pomoWork = work; pomoRest = rest; clearInterval(pomoInt); pomoRunning = false;
+  pomoIsWork = true; if(!keepCount) pomoCount = 0;
+  pomoTotal = pomoWork*60; pomoLeft = pomoTotal; updatePomoRing();
+}
+function registerFocusMinutes(min){
+  stats.totalFocusMinutes += min;
+  const key = todayKey(); stats.history[key] = (stats.history[key]||0) + min;
+  const yestKey = new Date(Date.now()-86400000).toISOString().slice(0,10);
+  if(stats.lastDate === yestKey) stats.streak += 1; else if(stats.lastDate !== key) stats.streak = 1;
+  stats.lastDate = key; saveStats(); renderStats();
+}
+function renderStats(){
+  $('stat-pomos').textContent = stats.completedPomodoros;
+  $('stat-focus').textContent = `${stats.totalFocusMinutes} min`;
+  $('stat-streak').textContent = stats.streak;
+  $('stat-today').textContent = `${stats.history[todayKey()]||0} min`;
+}
+function notify(title, body){
+  if('Notification' in window){
+    if(Notification.permission === 'granted') new Notification(title,{body});
+    else if(Notification.permission !== 'denied') Notification.requestPermission();
+  }
+}
+function tickPomo(){
+  if(pomoLeft<=0){
+    beep(660,250); setTimeout(()=>beep(990,250),260);
+    if(pomoIsWork){
+      pomoCount++; stats.completedPomodoros++; registerFocusMinutes(pomoWork);
+      notify('¡Pomodoro completado! 🍅', 'Toca descansar un poco ☕'); pomoIsWork = false; pomoTotal = pomoRest*60;
+    } else { notify('Descanso terminado 🌤️', 'Hora de volver al trabajo'); pomoIsWork = true; pomoTotal = pomoWork*60; }
+    pomoLeft = pomoTotal; $('motivation').textContent = MOTIVATIONS[Math.floor(Math.random()*MOTIVATIONS.length)];
+    updatePomoRing(); return;
+  }
+  pomoLeft--; updatePomoRing();
+}
+$('pomo-start').addEventListener('click', ()=>{
+  if(pomoRunning) return; pomoRunning = true;
+  $('motivation').textContent = MOTIVATIONS[Math.floor(Math.random()*MOTIVATIONS.length)];
+  pomoInt = setInterval(tickPomo, 1000);
+});
+$('pomo-pause').addEventListener('click', ()=>{ clearInterval(pomoInt); pomoRunning=false; });
+$('pomo-reset').addEventListener('click', ()=> resetPomodoroToPreset(pomoWork, pomoRest, false));
+document.querySelectorAll('.preset-btn[data-work]').forEach(b=>{
+  b.addEventListener('click', ()=>{
+    document.querySelectorAll('.preset-btn').forEach(x=>x.classList.remove('active')); b.classList.add('active');
+    resetPomodoroToPreset(parseInt(b.dataset.work), parseInt(b.dataset.rest), false);
+  });
+});
+$('preset-custom').addEventListener('click', ()=>{
+  document.querySelectorAll('.preset-btn').forEach(x=>x.classList.remove('active'));
+  $('preset-custom').classList.add('active'); $('settings-btn').click();
+});
+
+/* ==================================================================
+   Calendario
+   ================================================================== */
+let calDate = new Date();
+function renderCalendar(){
+  const y = calDate.getFullYear(), m = calDate.getMonth();
+  $('cal-label').textContent = calDate.toLocaleDateString('es-ES',{month:'long', year:'numeric'});
+  const first = new Date(y,m,1);
+  const startOffset = (first.getDay()+6)%7; // lunes=0
+  const daysInMonth = new Date(y,m+1,0).getDate();
+  const today = new Date();
+  const grid = $('cal-grid'); grid.innerHTML = '';
+  ['L','M','X','J','V','S','D'].forEach(d=>{ const el=document.createElement('div'); el.className='dow'; el.textContent=d; grid.appendChild(el); });
+  for(let i=0;i<startOffset;i++){ const el=document.createElement('div'); el.className='cal-day empty'; grid.appendChild(el); }
+  for(let d=1; d<=daysInMonth; d++){
+    const el = document.createElement('div'); el.className='cal-day'; el.textContent = d;
+    if(d===today.getDate() && m===today.getMonth() && y===today.getFullYear()) el.classList.add('today');
+    grid.appendChild(el);
+  }
+}
+$('cal-prev').addEventListener('click', ()=>{ calDate.setMonth(calDate.getMonth()-1); renderCalendar(); });
+$('cal-next').addEventListener('click', ()=>{ calDate.setMonth(calDate.getMonth()+1); renderCalendar(); });
+
+/* ==================================================================
+   Lista de tareas
+   ================================================================== */
+function renderTodos(){
+  const list = $('todo-list'); list.innerHTML = '';
+  $('todo-empty').style.display = todos.length ? 'none' : 'block';
+  todos.forEach(t=>{
+    const li = document.createElement('li'); if(t.done) li.classList.add('done');
+    const check = document.createElement('div'); check.className='check';
+    check.addEventListener('click', ()=>{ t.done = !t.done; saveTodos(); renderTodos(); });
+    const span = document.createElement('span'); span.textContent = t.text;
+    const del = document.createElement('i'); del.className='fa-solid fa-xmark del';
+    del.addEventListener('click', ()=>{ todos = todos.filter(x=>x.id!==t.id); saveTodos(); renderTodos(); });
+    li.appendChild(check); li.appendChild(span); li.appendChild(del); list.appendChild(li);
+  });
+}
+function addTodo(){
+  const v = $('todo-input').value.trim(); if(!v) return;
+  todos.push({ id: Date.now(), text: v, done:false }); saveTodos(); renderTodos(); $('todo-input').value='';
+}
+$('todo-add').addEventListener('click', addTodo);
+$('todo-input').addEventListener('keydown', e=>{ if(e.key==='Enter') addTodo(); });
+
+/* ==================================================================
+   Inicio
+   ================================================================== */
+buildSoundButtons();
+applyTheme();
+renderStats();
+updatePomoRing();
+renderCalendar();
+renderTodos();
+searchCity(settings.favCity || 'Barcelona');
+</script>
+</body>
+</html>
