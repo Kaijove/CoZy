@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#FF9EC4">
+<title>SkyMood ⋆｡°✩</title>
+<link rel="manifest" href="manifest.json">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Quicksand:wght@400;500;600;700&family=Baloo+2:wght@500;700&family=Comfortaa:wght@500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div id="lightning"></div>
+<div id="sky">
+  <div class="celestial" id="celestial"></div>
+  <div id="shootingstars-layer"></div>
+  <div class="mountains far" id="mountains-far"></div>
+  <div class="mountains near" id="mountains-near"></div>
+  <div id="birds-layer"></div>
+  <div class="treeline" id="treeline"></div>
+  <div id="fireflies-layer"></div>
+  <div id="fog-layer"></div>
+</div>
+
+<div id="app">
+  <div class="topbar">
+    <div class="brand">
+      <h1>Sky<span>Mood</span> ⋆｡°✩</h1>
+      <div class="credit">fet per Kai Jové</div>
+    </div>
+    <div class="icon-group">
+      <button class="icon-btn" id="share-btn" title="Compartir estadísticas"><i class="fa-solid fa-share-nodes"></i></button>
+      <button class="icon-btn" id="fullscreen-btn" title="Pantalla completa"><i class="fa-solid fa-expand"></i></button>
+      <button class="icon-btn" id="settings-btn" title="Ajustes"><i class="fa-solid fa-gear"></i></button>
+    </div>
+  </div>
+
+  <div class="dashboard">
+    <!-- ===== COLUMNA PRINCIPAL: CLIMA ===== -->
+    <div class="col-main">
+      <div class="widget">
+        <div class="search-row">
+          <input id="city-input" type="text" placeholder="Escribe una ciudad... 🌍" />
+          <button class="btn-primary" id="search-btn">Buscar</button>
+        </div>
+        <div class="fav-row" id="fav-row"></div>
+        <button class="btn-secondary" id="geo-btn">📍 Detectar mi ubicación</button>
+        <p id="status"></p>
+
+        <div id="card">
+          <div class="weather-top">
+            <div class="mascot" id="mascot">🌤️</div>
+            <div>
+              <div><span id="city-name">—</span><i class="fa-regular fa-star" id="fav-star" title="Guardar como favorita"></i></div>
+              <div id="location-sub" class="location-sub"></div>
+              <div id="local-time">--:--</div>
+              <div id="desc">—</div>
+            </div>
+            <div id="temp">--°</div>
+          </div>
+
+          <div class="sun-row">
+            <div class="sun-pill">🌅 <b id="sunrise">--:--</b></div>
+            <div class="sun-pill">🌇 <b id="sunset">--:--</b></div>
+            <div class="sun-pill">🌕 <b id="moon-phase">--</b></div>
+          </div>
+
+          <div class="details-grid">
+            <div class="detail">🌡️ Sensación<b id="feels">--°</b></div>
+            <div class="detail">💧 Humedad<b id="humidity">--%</b></div>
+            <div class="detail">💨 Viento<b id="wind">--</b></div>
+            <div class="detail">🎈 Presión<b id="pressure">--</b></div>
+            <div class="detail">🔆 Índice UV<b id="uv">--</b></div>
+            <div class="detail">👁️ Visibilidad<b id="visibility">--</b></div>
+            <div class="detail">🌦️ Lluvia<b id="rainprob">--%</b></div>
+            <div class="detail">🍃 Aire<b id="aqi">--</b></div>
+          </div>
+
+          <div id="msg"></div>
+
+          <div class="sound-title">⏰ Próximas horas</div>
+          <div class="hourly-strip" id="hourly"></div>
+          <div class="sound-title">📆 Próximos días</div>
+          <div class="forecast-strip" id="forecast"></div>
+
+          <img id="city-photo" alt="">
+          <span class="map-toggle" id="map-toggle">🗺️ Ver mapa</span>
+          <iframe id="map-frame" loading="lazy"></iframe>
+
+          <div class="sound-title">🎵 Sonido ambiente (mezclable)</div>
+          <div class="sound-row" id="sound-tracks"></div>
+          <div class="sound-title">〰️ Ruido</div>
+          <div class="sound-row" id="noise-tracks"></div>
+          <div class="volume-row">
+            <button class="icon-btn" id="audio-toggle" title="Reproducir/Pausar todo"><i class="fa-solid fa-play"></i></button>
+            <i class="fa-solid fa-volume-low"></i>
+            <input type="range" id="volume" min="0" max="1" step="0.05" value="0.6">
+            <i class="fa-solid fa-volume-high"></i>
+          </div>
+        </div>
+      </div>
+
+      <div class="widget">
+        <h3>💬 Frase del día</h3>
+        <div class="quote-box" id="quote-box">—</div>
+        <button class="quote-refresh" id="quote-refresh">🔀 Otra frase</button>
+      </div>
+
+      <div class="widget" id="apod-widget">
+        <h3>✨ Descubrimiento del día <span class="widget-tag">NASA</span></h3>
+        <div id="apod-loading" class="apod-loading">Cargando la imagen del día...</div>
+        <img id="apod-img" class="apod-img" alt="" style="display:none">
+        <div id="apod-title" class="apod-title"></div>
+        <div id="apod-text" class="apod-text"></div>
+      </div>
+
+      <div class="widget" id="iss-widget">
+        <h3>🛰️ La ISS ahora mismo <button class="icon-btn small" id="iss-refresh" title="Actualizar"><i class="fa-solid fa-rotate"></i></button></h3>
+        <div class="iss-row">
+          <div class="iss-earth">🌍</div>
+          <div>
+            <div id="iss-location" class="iss-location">Buscando la estación...</div>
+            <div id="iss-coords" class="iss-coords">-- , --</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="widget" id="trivia-widget">
+        <h3>🧠 Pausa mental <button class="icon-btn small" id="trivia-refresh" title="Nueva pregunta"><i class="fa-solid fa-shuffle"></i></button></h3>
+        <div id="trivia-meta" class="trivia-meta"></div>
+        <div id="trivia-question" class="trivia-question">Cargando pregunta...</div>
+        <div id="trivia-options" class="trivia-options"></div>
+      </div>
+    </div>
+
+    <!-- ===== COLUMNA LATERAL ===== -->
+    <div class="col-side">
+      <div class="widget">
+        <div class="subtabs">
+          <button class="subtab active" data-sub="timer">⏱️ Timer</button>
+          <button class="subtab" data-sub="pomodoro">🍅 Pomodoro</button>
+          <button class="subtab" data-sub="stopwatch">⏳ Cronóm.</button>
+        </div>
+
+        <div class="subpanel active" id="sub-timer">
+          <div class="ring-wrap">
+            <svg width="145" height="145">
+              <circle class="ring-bg" cx="72.5" cy="72.5" r="63"></circle>
+              <circle class="ring-fg" id="ring-fg-timer" cx="72.5" cy="72.5" r="63" stroke-dasharray="396" stroke-dashoffset="0"></circle>
+            </svg>
+            <div class="ring-center"><div id="timer-display">05:00</div><div id="timer-sub">listo</div></div>
+          </div>
+          <div class="time-inputs">
+            <input type="number" id="min-input" min="0" max="180" value="5">
+            <input type="number" id="sec-input" min="0" max="59" value="0">
+          </div>
+          <div class="control-row">
+            <button class="ctrl-icon primary" id="timer-start" title="Iniciar"><i class="fa-solid fa-play"></i></button>
+            <button class="ctrl-icon" id="timer-pause" title="Pausar"><i class="fa-solid fa-pause"></i></button>
+            <button class="ctrl-icon" id="timer-reset" title="Reiniciar"><i class="fa-solid fa-rotate-left"></i></button>
+          </div>
+        </div>
+
+        <div class="subpanel" id="sub-pomodoro">
+          <div class="preset-row">
+            <button class="preset-btn active" data-work="25" data-rest="5">25/5</button>
+            <button class="preset-btn" data-work="50" data-rest="10">50/10</button>
+            <button class="preset-btn" id="preset-custom">Personal.</button>
+          </div>
+          <div class="ring-wrap">
+            <svg width="145" height="145">
+              <circle class="ring-bg" cx="72.5" cy="72.5" r="63"></circle>
+              <circle class="ring-fg" id="ring-fg-pomo" cx="72.5" cy="72.5" r="63" stroke-dasharray="396" stroke-dashoffset="0"></circle>
+            </svg>
+            <div class="ring-center"><div id="pomo-display">25:00</div><div id="session-label">Trabajo #1</div></div>
+          </div>
+          <div class="control-row">
+            <button class="ctrl-icon primary" id="pomo-start" title="Iniciar"><i class="fa-solid fa-play"></i></button>
+            <button class="ctrl-icon" id="pomo-pause" title="Pausar"><i class="fa-solid fa-pause"></i></button>
+            <button class="ctrl-icon" id="pomo-reset" title="Reiniciar"><i class="fa-solid fa-rotate-left"></i></button>
+          </div>
+          <div id="motivation">🌱 Cada sesión suma. ¡Tú puedes!</div>
+        </div>
+
+        <div class="subpanel" id="sub-stopwatch">
+          <div class="sw-display-wrap"><div id="sw-display">00:00</div></div>
+          <div class="control-row">
+            <button class="ctrl-icon primary" id="sw-start" title="Iniciar"><i class="fa-solid fa-play"></i></button>
+            <button class="ctrl-icon" id="sw-pause" title="Pausar"><i class="fa-solid fa-pause"></i></button>
+            <button class="ctrl-icon" id="sw-reset" title="Reiniciar"><i class="fa-solid fa-rotate-left"></i></button>
+          </div>
+        </div>
+      </div>
+
+      <div class="widget">
+        <h3>🎯 Objetivo de hoy</h3>
+        <div class="bar-track"><div class="bar-fill" id="goal-bar"></div></div>
+        <div class="bar-label"><span id="goal-text">0 / 4 h</span><span id="goal-pct">0%</span></div>
+      </div>
+
+      <div class="widget">
+        <h3>🎮 Nivel <span id="level-num">1</span></h3>
+        <div class="bar-track"><div class="bar-fill" id="xp-bar"></div></div>
+        <div class="bar-label"><span id="xp-text">0 / 100 XP</span></div>
+        <div class="badges-grid" id="badges-grid"></div>
+      </div>
+
+      <div class="widget">
+        <h3>📊 Estadísticas</h3>
+        <div class="stats-grid">
+          <div class="stat"><b id="stat-pomos">0</b><span>Pomodoros hoy</span></div>
+          <div class="stat"><b id="stat-focus">0 min</b><span>Total</span></div>
+          <div class="stat"><b id="stat-streak">0</b><span>Racha actual</span></div>
+          <div class="stat"><b id="stat-best">0</b><span>Mejor racha</span></div>
+          <div class="stat"><b id="stat-week">0 min</b><span>Esta semana</span></div>
+          <div class="stat"><b id="stat-month">0 min</b><span>Este mes</span></div>
+        </div>
+        <div class="chart-row" id="chart-row"></div>
+        <div class="chart-labels" id="chart-labels"></div>
+      </div>
+
+      <div class="widget">
+        <h3>📅 Calendario</h3>
+        <div class="cal-head">
+          <button class="cal-nav" id="cal-prev"><i class="fa-solid fa-chevron-left"></i></button>
+          <b id="cal-label">—</b>
+          <button class="cal-nav" id="cal-next"><i class="fa-solid fa-chevron-right"></i></button>
+        </div>
+        <div class="cal-grid" id="cal-grid"></div>
+        <div id="cal-events"></div>
+      </div>
+
+      <div class="widget">
+        <h3>✅ Cosas por hacer</h3>
+        <div class="todo-row">
+          <input id="todo-input" type="text" placeholder="Añadir tarea...">
+          <button id="todo-add"><i class="fa-solid fa-plus"></i></button>
+        </div>
+        <ul id="todo-list"></ul>
+        <div id="todo-empty">No tienes tareas pendientes 🌤️</div>
+      </div>
+
+      <div class="widget">
+        <h3>📝 Notas</h3>
+        <textarea id="notes-area" placeholder="Escribe aquí tus notas... se guardan solas ✨"></textarea>
+        <div class="notes-actions">
+          <button id="notes-export"><i class="fa-solid fa-download"></i> Exportar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== SETTINGS MODAL ===== -->
+<div id="overlay">
+  <div id="settings-panel">
+    <h2>Ajustes <button class="icon-btn" id="close-settings"><i class="fa-solid fa-xmark"></i></button></h2>
+    <div class="setting-row"><span>🌙 Tema oscuro</span>
+      <label class="switch"><input type="checkbox" id="opt-dark"><span class="knob"></span></label>
+    </div>
+    <div class="setting-row"><span>🎨 Color principal</span>
+      <input type="color" id="opt-color" value="#FF9EC4">
+    </div>
+    <div class="setting-row"><span>🔤 Fuente</span>
+      <select id="opt-font">
+        <option value="Fredoka">Fredoka</option>
+        <option value="Baloo 2">Baloo 2</option>
+        <option value="Comfortaa">Comfortaa</option>
+      </select>
+    </div>
+    <div class="setting-row"><span>🎵 Música ambiente</span>
+      <label class="switch"><input type="checkbox" id="opt-music" checked><span class="knob"></span></label>
+    </div>
+    <div class="setting-row"><span>✨ Animaciones</span>
+      <label class="switch"><input type="checkbox" id="opt-anim" checked><span class="knob"></span></label>
+    </div>
+    <div class="setting-row"><span>🔊 Volumen</span>
+      <input type="range" id="opt-volume" min="0" max="1" step="0.05" value="0.6">
+    </div>
+    <div class="setting-row"><span>🏙️ Ciudad favorita</span>
+      <input type="text" id="opt-city" placeholder="Barcelona">
+    </div>
+    <div class="setting-row"><span>🍅 Pomodoro (min)</span>
+      <input type="number" id="opt-pomo-work" value="25" min="1" max="180">
+    </div>
+    <div class="setting-row"><span>☕ Descanso (min)</span>
+      <input type="number" id="opt-pomo-rest" value="5" min="1" max="60">
+    </div>
+    <div class="setting-row"><span>🎯 Meta diaria (h)</span>
+      <input type="number" id="opt-goal" value="4" min="1" max="16">
+    </div>
+    <button class="btn-primary" style="width:100%; margin-bottom:10px;" id="save-settings">Guardar ajustes</button>
+    <div class="settings-actions">
+      <button id="export-data"><i class="fa-solid fa-file-export"></i> Exportar datos</button>
+      <button id="import-data-btn"><i class="fa-solid fa-file-import"></i> Importar</button>
+    </div>
+    <input type="file" id="import-file" accept="application/json" style="display:none">
+  </div>
+</div>
+
+<audio id="ambient-audio" loop></audio>
+
+<script src="config.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
