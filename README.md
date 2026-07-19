@@ -1,400 +1,462 @@
 <div align="center">
 
-# 🤏 PINCH·TIME
+# 🌤️ CoZy
+# 🌤️ SkyMood
 
-### Time doesn't live on a timeline anymore.
+### Your weather. Your mood. Your focus.
+### Smart Weather • Ambient • Focus
 
-**Control video playback using nothing but your hand.**
-Pinch to play. Open your fingers to slow down, freeze, or travel backwards in time.
+An immersive dashboard that combines **real-time weather**, **ambient sounds** and **productivity tools** into one beautiful workspace.
+*A beautiful productivity dashboard that transforms weather into an immersive workspace.*
 
+🌐 **Live Demo:** https://cozychan.netlify.app
 <p>
-<a href="https://pinchthetime.netlify.app">
-<img src="https://img.shields.io/badge/🌐_Live_Demo-Netlify-00C7B7?style=for-the-badge">
-</a>
-<img src="https://img.shields.io/badge/React-19-61DAFB?style=for-the-badge&logo=react&logoColor=white">
-<img src="https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=typescript&logoColor=white">
-<img src="https://img.shields.io/badge/MediaPipe-Hand_Tracking-FF6F00?style=for-the-badge">
-<img src="https://img.shields.io/badge/Vite-646CFF?style=for-the-badge&logo=vite&logoColor=white">
+
+**🌐 Live Demo**  
+https://cozychan.netlify.app
+
 </p>
 
-<p>
-<img src="https://img.shields.io/badge/status-active-success?style=flat-square">
-<img src="https://img.shields.io/badge/license-MIT-blue?style=flat-square">
-<img src="https://img.shields.io/badge/PRs-welcome-brightgreen?style=flat-square">
-</p>
+![JavaScript](https://img.shields.io/badge/JavaScript-ES6+-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)
+![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white)
+![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white)
+![JavaScript](https://img.shields.io/badge/JavaScript-ES6+-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)
+![Open-Meteo](https://img.shields.io/badge/API-Open--Meteo-4DA3FF?style=for-the-badge)
+![Status](https://img.shields.io/badge/Status-Under_Development-orange?style=for-the-badge)
+![NASA](https://img.shields.io/badge/API-NASA_APOD-0B3D91?style=for-the-badge)
+![PWA](https://img.shields.io/badge/PWA-Ready-5A0FC8?style=for-the-badge)
+![Status](https://img.shields.io/badge/Status-Active_Development-orange?style=for-the-badge)
 
-<br>
+</div>
+
+@@ -22,240 +28,307 @@ An immersive dashboard that combines **real-time weather**, **ambient sounds** a
+# 📸 Preview
 
 <p align="center">
-<img src="docs/previews/hero.gif" width="100%" alt="PINCH·TIME hero demo">
+    <img src="dashboard.png">
+<img src="dashboard.png" width="100%">
 </p>
 
-</div>
+---
+
+# ✨ About
+
+**CoZy** is a modern dashboard designed to make studying and working more enjoyable.
+**SkyMood** is a modern weather and productivity dashboard built to create a calm, immersive workspace.
+
+Instead of only displaying the weather, CoZy transforms your workspace into a relaxing environment by combining:
+Instead of simply displaying the weather, SkyMood combines **real-time meteorological data**, **dynamic ambient environments**, **focus tools**, and **personal productivity widgets** into one elegant experience.
+
+- 🌤️ Live weather information
+- 🎵 Ambient sounds
+- 🍅 Focus tools
+- 📅 Productivity widgets
+Every visit feels different.
+
+The application adapts automatically to:
+
+- 🌤️ Current weather
+- 🌅 Time of day
+- 🌙 Day & night cycle
+- 🌦️ Weather conditions
+- 🎨 Dynamic themes
+- 🎵 Ambient sounds
+
+Everything changes depending on the current weather and time of day, creating a unique experience every time you open the app.
+The goal is simple:
+
+> **Turn your workspace into a place where you actually enjoy studying and working.**
 
 ---
 
-## 📸 Preview
+# 🚀 Current Features
+# 🚀 Features
 
-<table>
-<tr>
-<td width="50%"><img src="preview-1.png" alt="Preview 1"/></td>
-<td width="50%"><img src="preview-2.png" alt="Preview 2"/></td>
-</tr>
-</table>
+### 🌤️ Weather
+## 🌤️ Smart Weather
 
----
-
-## 🌐 Live Demo
-
-<div align="center">
-
-### 👉 [pinchthetime.netlify.app](https://pinchthetime.netlify.app/)
-
-Experience the interaction yourself, directly in your browser.
-No installation required — just allow camera access and start pinching.
-
-</div>
-
----
-
-## ✨ About
-
-PINCH·TIME explores a different way of interacting with digital media.
-
-Instead of dragging a timeline or pressing buttons, **the distance between your thumb and index finger becomes a continuous timeline controller.** Your hand literally controls time.
-
-There's no button for "reverse." No slider for "slow motion." Just your hand, a camera, and a video that responds to how open or closed your fingers are, frame by frame, in real time.
-
-The result feels somewhere between gesture interaction, cinematic editing, and science-fiction interfaces — the kind of control you'd expect from a film about the future, not a browser tab.
+- Search any city
+- Detect your current location
+- Current temperature
+- Feels like temperature
+- Real-time weather
+- Temperature
+- Feels like
+- Humidity
+- Wind speed
+- Air quality
+- Local time
+- Multi-day forecast
+- Pressure
+- UV Index
+- Visibility
+- Air Quality
+- Rain Probability
+- Sunrise & Sunset
+- Moon Phase
+- Hourly Forecast
+- 7-Day Forecast
+- Favorite Cities
+- Automatic Geolocation
 
 ---
 
-## 🎯 How It Feels
+### 🎨 Dynamic Themes
+## 🎨 Immersive Environment
 
-<table>
-<tr>
-<td width="33%" align="center">
+The entire interface changes depending on the weather and local time.
 
-**🤏 Precise**
+- Sunny
+- Rain
+- Snow
+- Clouds
+- Thunderstorms
+- Night mode
+- Dynamic colors
+- Animated backgrounds
+Features include:
 
-Every millimeter between your fingers maps to a moment in time. Nothing is quantized — it's continuous.
-
-</td>
-<td width="33%" align="center">
-
-**⏪ Reversible**
-
-Reverse isn't a fake rewind icon. The engine reconstructs motion and audio backwards, frame by frame.
-
-</td>
-<td width="33%" align="center">
-
-**🎬 Cinematic**
-
-Aurora animations, parallax, and magnetic UI elements make the whole experience feel alive before you even touch it.
-
-</td>
-</tr>
-</table>
-
----
-
-## 🎬 Gesture Mapping
-
-| Gesture | Action | Feel |
-|---|---|---|
-| 🤏 Fingers together | Normal playback | Natural, resting state |
-| 👌 Slightly open | Slow motion | Time stretches |
-| ✋ Half open | Freeze frame | Time stops |
-| 🖐 Fully open | Reverse playback | Time rewinds |
-
-The transition between these states is **completely continuous** — there are no fixed steps or snapping. Your hand's position is sampled and smoothed dozens of times per second, so the video responds as fluidly as your hand moves.
+- Animated landscapes
+- Dynamic backgrounds
+- Mountains
+- Moving clouds
+- Trees reacting to wind
+- Rain effects
+- Snow particles
+- Lightning
+- Fog
+- Fireflies
+- Shooting stars
+- Seasonal themes
+- Automatic Day/Night transitions
+- Adaptive color palette
 
 ---
 
-## 🎥 Traditional Controls vs PINCH·TIME
+### 🎵 Ambient Sounds
+## 🎵 Ambient Sound Mixer
 
-Gesture interaction doesn't replace familiar controls — it enhances them. Every classic control is still there for when you want it.
+Choose the atmosphere you want.
+Create your own perfect study atmosphere.
 
-| | Traditional Player | PINCH·TIME |
-|---|---|---|
-| Play / Pause | ✔ Button | ✔ Button + 🤏 Gesture |
-| Seek | ✔ Drag timeline | ✔ Drag timeline + 🖐 Hand distance |
-| Slow motion | ✘ Rarely available | ✔ Continuous, gesture-driven |
-| Reverse playback | ✘ Not supported | ✔ Real frame-by-frame reverse + reverse audio |
-| Input method | Mouse / touch only | Mouse, touch, keyboard **and** camera |
-| Feel | Functional | Cinematic |
+Available sounds:
 
-**Also included:**
+- 🌧 Rain
+- 🌊 Ocean
+- 🌲 Forest
+- 🌊 Ocean
+- 🔥 Fireplace
+- 🌬 Wind
+- 🐦 Birds
+- 🎵 Relaxing melody
+- ☕ Coffee Shop
+- 📚 Library
+- 🏞 River
+- 🎵 Lo-Fi
+- 🤍 White Noise
+- 💗 Pink Noise
+- 🤎 Brown Noise
 
-✔ Play / Pause · ✔ Timeline Scrubbing · ✔ Drag to Seek · ✔ Volume Slider · ✔ Mute · ✔ Fullscreen · ✔ Keyboard Shortcuts
+Features:
 
----
+- Independent volume controls
+- Play / Pause
+- Volume control
+- Switch sounds instantly
+- Sound mixing
+- Smooth fade effects
 
-## ⚡ Highlights
+Example:
 
-### 🎯 Real-time Hand Tracking
-Powered by **MediaPipe Hand Landmarker**. Tracks hand landmarks at high frame rates with extremely low latency, directly in the browser — no server round-trip.
-
-### ⏪ Continuous Reverse Playback
-Not just a visual trick. The playback engine actually **reconstructs reverse motion frame-by-frame** while synchronizing a dedicated reverse audio buffer, so rewinding sounds as real as it looks.
-
-### 🔊 Dynamic Audio Engine
-The audio changes depending on playback direction. Forward playback smoothly fades in; reverse playback activates a custom rewind audio buffer instead of just muting or reversing a raw stream.
-
-### 🎨 Cinematic Landing Experience
-The homepage reacts to the visitor:
-
-- Aurora animations
-- Rain simulation
-- Depth parallax
-- Magnetic buttons
-- Floating particles
-- Interactive hero
-- Cursor-driven effects
-- Easter eggs
-
-Everything is designed to feel alive before the user even touches the video.
+> 🌧 Rain + 🔥 Fireplace + 🌲 Forest
 
 ---
 
-## 🧠 How It Works
+### 🍅 Focus Tools
+## 🍅 Productivity
 
-```
-Camera
-  │
-  ▼
-MediaPipe
-  │
-Hand Detection
-  │
-Pinch Distance
-  │
-One Euro Filter        ← smooths jittery raw landmark data
-  │
-Velocity Mapping        ← converts distance/speed into playback rate
-  │
-Scrub Engine
-  │
-Reverse Audio
-  │
-Video Playback
-```
+Stay focused while you work.
 
-The **One Euro Filter** is what keeps the interaction feeling precise instead of jittery — it adapts its smoothing based on how fast your hand is moving, so slow, deliberate gestures stay stable while fast gestures stay responsive.
+Includes:
+
+- Pomodoro Timer
+- Countdown Timer
+- Stopwatch
+- Daily Goals
+- Weekly Goals
+- Todo List
+- Notes
+- Calendar
+- Study Sessions
+- Focus Mode
 
 ---
 
-## 🏗 Architecture
+## 📊 Statistics
 
-```
-┌──────────────────────────────────────────────────┐
-│                    Browser                        │
-│                                                     │
-│  ┌─────────────┐     ┌──────────────────────────┐ │
-│  │   Camera    │────▶│   MediaPipe Hand          │ │
-│  │   Service   │     │   Landmarker (WASM)       │ │
-│  └─────────────┘     └────────────┬─────────────┘ │
-│                                    │               │
-│                                    ▼               │
-│                       ┌────────────────────────┐  │
-│                       │  Interaction Engine     │  │
-│                       │  (filter + velocity +   │  │
-│                       │   dead zones/hysteresis)│  │
-│                       └────────────┬────────────┘  │
-│                                    │               │
-│                     ┌──────────────┴─────────────┐ │
-│                     ▼                             ▼│
-│          ┌────────────────────┐      ┌──────────────────┐
-│          │  HTML Video Element │      │  Web Audio API     │
-│          │  (forward / reverse)│      │  (reverse buffer)  │
-│          └────────────────────┘      └──────────────────┘
-└──────────────────────────────────────────────────┘
-```
+Track your progress over time.
+
+- Hours Studied
+- Completed Pomodoros
+- Current Streak
+- Longest Streak
+- Weekly Progress
+- Monthly Progress
+- Productivity Charts
+- Goal Completion
+
+Everything is saved locally using **LocalStorage**.
 
 ---
 
-## 🛠 Tech Stack
+### 📅 Productivity
+## 🏆 Gamification
 
-| Frontend | AI / Vision | Media | Tooling |
-|---|---|---|---|
-| React | MediaPipe | HTML Video API | Vite |
-| TypeScript | Hand Landmarker | Web Audio API | ESLint |
-| CSS | — | Fullscreen API | npm |
+Learning should feel rewarding.
+
+Unlock:
+
+- Interactive Calendar
+- To-do List
+- Daily Planning
+- XP
+- Levels
+- Achievements
+- Badges
+- Daily Challenges
+- Study Streaks
 
 ---
 
-## 📂 Project Structure
+### 📱 Responsive Design
+## 🌍 Explore
 
-```
-pinch-time/
+Works on:
+Additional widgets include:
+
+- Desktop
+- Laptop
+- Tablet
+- Mobile
+- 🗺 Interactive Map
+- 📍 Reverse Geolocation
+- 📷 City Images
+- 🌌 NASA Astronomy Picture of the Day
+- 🛰 ISS Live Tracker
+- 💬 Daily Motivation
+- 🌕 Moon Information
+
+---
+
+# 🛠 Tech Stack
+# 🛠️ Tech Stack
+
+### Frontend
+
+- HTML5
+- CSS3
+- JavaScript (ES6+)
+
+### APIs
+
+- Open-Meteo
+- BigDataCloud Reverse Geocoding
+- OpenStreetMap
+- Wikipedia REST API
+- REST Countries
+- NASA APOD
+- WhereTheISS.at
+
+### Technologies
+
+- Fetch API
+- Open-Meteo API
+- LocalStorage
+- Git LFS
+- Web Audio API
+- Font Awesome
+- Google Fonts
+- Progressive Web App (PWA)
+
+---
+
+# 📁 Project Structure
+
+```text
+CoZy
+SkyMood
 │
-├── src/
-│   ├── components/          # UI components (player, HUD, landing)
-│   ├── services/             # Camera + MediaPipe integration
-│   ├── engine/                # Scrub engine, filters, velocity mapping
-│   ├── audio/                 # Reverse audio engine
-│   └── config/
-│       └── interaction.ts     # All tuning constants live here
+├── assets/
+│   ├── sounds/
+│   ├── backgrounds/
+│   ├── icons/
+│   └── images/
+│   ├── images/
+│   └── sounds/
 │
+├── css/
+├── js/
 ├── docs/
-│   ├── previews/               # Static screenshots
-│   ├── diagrams/                # Architecture / pipeline images
-│   └── gifs/                     # Demo GIFs
+│   └── images/
 │
-├── public/
+├── manifest.json
+├── service-worker.js
 ├── index.html
-└── package.json
+└── README.md
 ```
 
 ---
 
-## 🚀 Installation
+# 🚧 Roadmap
+# 💡 Why I Built This
 
-```bash
-# Clone the repository
-git clone https://github.com/your-username/pinch-time.git
-cd pinch-time
+The project is still under active development.
 
-# Install dependencies
-npm install
+### Weather
 
-# Run the dev server
-npm run dev
-```
+- [x] Current weather
+- [x] Forecast
+- [x] Geolocation
+- [ ] UV Index
+- [ ] Hourly forecast
+- [ ] Weather alerts
 
-Then open:
+### Ambient Experience
 
-```
-http://localhost:5173
-```
+- [x] Ambient sounds
+- [x] Volume controls
+- [ ] Automatic sound recommendations
+- [ ] Animated rain
+- [ ] Snow particles
+- [ ] Dynamic wallpapers
+- [ ] Day/Night transitions
 
-> 📷 Your browser will ask for camera permission — this is required for hand tracking and never leaves your device.
+### Productivity
+
+- [x] Pomodoro Timer
+- [x] Countdown Timer
+- [x] Calendar
+- [x] Todo List
+- [ ] Statistics
+- [ ] Focus history
+- [ ] Daily goals
+- [ ] Weekly reports
+
+### Customization
+
+- [ ] Dark mode
+- [ ] Light mode
+- [ ] Custom themes
+- [ ] Favorite city
+- [ ] User preferences
+
+### Future Ideas
+
+- [ ] Spotify integration
+- [ ] AI study assistant
+- [ ] Motivational quotes
+- [ ] Habit tracker
+- [ ] Cloud synchronization
+- [ ] PWA support
+- [ ] Offline mode
+- [ ] User accounts
+SkyMood started as a simple weather application.
+
+---
+As the project evolved, it became a complete productivity dashboard designed to combine:
+
+# 📂 Repository Notes
+- Beautiful UI
+- Weather APIs
+- Ambient experiences
+- Productivity tools
+- Frontend architecture
+- Modern animations
+
+Current repository contains:
+The project was built to improve my skills in:
+
+- `index.html`
+- `assets/sounds/`
+
+Audio files (`.mp3`) are stored using **Git LFS** due to their size.
+- API Integration
+- Asynchronous JavaScript
+- DOM Manipulation
+- LocalStorage
+- Responsive Design
+- UI / UX Design
+- CSS Animations
+- Frontend Architecture
 
 ---
 
-## 🎮 Controls
+# 💡 Why CoZy?
 
-| Key / Gesture | Action |
-|---|---|
-| 🤏 Pinch | Play at normal speed |
-| 🖐 Open hand | Reverse playback |
-| `Space` | Play / Pause |
-| `Esc` | Exit Fullscreen |
+CoZy was built as a personal learning project to improve skills in:
+# 🚧 Roadmap
 
----
+- API consumption
+- Asynchronous JavaScript
+- DOM manipulation
+- Responsive design
+- UI/UX
+- LocalStorage
+- Front-end architecture
+## Current Version
 
-## ⚙ Configuration
+- ✅ Real-time Weather
+- ✅ Dynamic Themes
+- ✅ Ambient Sounds
+- ✅ Pomodoro
+- ✅ Timer
+- ✅ Stopwatch
+- ✅ Todo List
+- ✅ Calendar
+- ✅ Statistics
+- ✅ XP & Achievements
+- ✅ NASA APOD
+- ✅ ISS Tracker
+- ✅ Interactive Map
+- ✅ PWA Support
 
-All interaction tuning lives in:
+### Coming Soon
 
-```
-src/config/interaction.ts
-```
-
-including:
-
-- Pinch calibration
-- Smoothing (One Euro Filter parameters)
-- Velocity curves
-- Dead zones
-- Hysteresis
-- Reverse thresholds
-- Audio behavior
-
-Tweak these values to adapt the sensitivity to different cameras, lighting conditions, or hand sizes.
-
----
-
-## 📈 Development Journey
-
-- ✅ Project architecture
-- ✅ Camera service
-- ✅ Hand tracking
-- ✅ Landmark overlay
-- ✅ Pinch detection
-- ✅ One Euro filter
-- ✅ Velocity mapping
-- ✅ Reverse playback engine
-- ✅ Reverse audio engine
-- ✅ UI redesign
-- ✅ Landing page
-- ✅ Gesture HUD
-- ✅ Mouse controls
-- ✅ Fullscreen mode
-- ✅ Interactive hero
-- ✅ Animations
-- ✅ Performance polish
+- Spotify Integration
+- AI Assistant
+- Cloud Sync
+- User Accounts
+- Habit Tracker
+- Focus Analytics
+- Multiplayer Study Rooms
+- Smart Recommendations
+- Mobile App
 
 ---
 
-## 🧩 Technical Challenges
+# 🤝 Contributions
 
-<details>
-<summary><b>Making reverse playback actually feel real</b></summary>
-<br>
-Browsers don't support native reverse video playback at arbitrary speed. The engine steps through frames manually and keeps them in sync with a separately generated reverse audio buffer, so the illusion holds up even under fast gestures.
-</details>
+Suggestions, ideas and pull requests are always welcome.
+Ideas, suggestions and pull requests are always welcome.
 
-<details>
-<summary><b>Killing hand-tracking jitter without adding lag</b></summary>
-<br>
-Raw MediaPipe landmarks are noisy frame-to-frame. A One Euro Filter was tuned so that slow movements get heavily smoothed (stable freeze-frames) while fast movements stay responsive (no perceptible input lag).
-</details>
-
-<details>
-<summary><b>Turning a single distance value into a natural feeling curve</b></summary>
-<br>
-Mapping raw pinch distance directly to speed felt robotic. Velocity mapping, dead zones, and hysteresis were added so the transition between play, slow-motion, freeze, and reverse feels continuous instead of snapping between fixed states.
-</details>
+If you have an idea to improve CoZy, feel free to open an issue.
+If you have an idea that could improve SkyMood, feel free to open an issue or submit a pull request.
 
 ---
 
-## 💡 What I Learned
+# ⭐ Support
 
-Most video players ask users to adapt to the interface. PINCH·TIME asks the interface to adapt to the user.
+If you like this project, please leave a ⭐ on GitHub.
+If you enjoyed this project, consider giving it a ⭐ on GitHub.
 
-Building it meant going deep into:
-
-- Real-time computer vision in the browser (MediaPipe)
-- Signal smoothing and filtering (One Euro Filter)
-- Low-level control of the HTML5 Video and Web Audio APIs
-- Designing an interaction model with no existing UI conventions to copy
-
-It's an experiment exploring whether gestures can become a more natural way of controlling time itself.
-
----
-
-## 🔮 Roadmap
-
-- [ ] Multi-hand support (two-handed gestures)
-- [ ] Mobile camera support
-- [ ] Custom gesture presets
-- [ ] Support for multiple video sources / playlists
-- [ ] Exportable gesture-tuning profiles
-
----
-
-## 🤝 Contributing
-
-Contributions, issues, and feature requests are welcome.
-
-1. Fork the project
-2. Create your feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
+It really helps and motivates future development.
 
 ---
 
 <div align="center">
 
-## ⭐ Support
+### ☀️ Stay productive. Stay CoZy.
+## 🌅 Stay focused. Stay productive. Stay SkyMood.
 
-If you enjoyed the project, consider giving it a star — it really helps.
-
-**Made with ❤️ using React, TypeScript and MediaPipe.**
-
-<sub>PINCH·TIME — because time shouldn't need a scrollbar.</sub>
-
-</div>
+Made with ❤️ by **Kai Jové**
+Built with ❤️ by **Kai Jové**
