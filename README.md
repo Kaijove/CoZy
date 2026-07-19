@@ -37,12 +37,8 @@ Pinch to play. Open your fingers to slow down, freeze, or travel backwards in ti
 
 <table>
 <tr>
-<td width="50%"><img src="docs/previews/preview-1.png" alt="Preview 1"/></td>
-<td width="50%"><img src="docs/previews/preview-2.png" alt="Preview 2"/></td>
-</tr>
-<tr>
-<td width="50%"><img src="docs/previews/preview-3.png" alt="Preview 3"/></td>
-<td width="50%"><img src="docs/previews/preview-4.png" alt="Preview 4"/></td>
+<td width="50%"><img src="preview-1.png" alt="Preview 1"/></td>
+<td width="50%"><img src="preview-2.png" alt="Preview 2"/></td>
 </tr>
 </table>
 
