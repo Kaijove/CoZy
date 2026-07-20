@@ -1,6 +1,6 @@
 <div align="center">
 
-# 🌤️ SkyMoo
+# 🌤️ SkyMood
 
 ### Smart Weather • Ambient • Focus
 
