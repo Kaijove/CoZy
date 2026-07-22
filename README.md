@@ -30,6 +30,7 @@ https://cozychan.netlify.app
 <p align="center">
 <img src="dashboard.png" width="100%">
 <img src="dashboard1.png" width="100%">
+<img src="67.png" width="100%">
 </p>
 
 ---
